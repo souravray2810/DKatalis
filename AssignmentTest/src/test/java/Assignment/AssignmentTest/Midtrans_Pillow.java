@@ -12,7 +12,7 @@ public class Midtrans_Pillow {
 		System.setProperty("webdriver.chrome.driver", "/Users/rajbalani/git/DKatalis/AssignmentTest/Drivers/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://demo.midtrans.com/");
-		System.out.println("Welcome to Midtrans");
+		System.out.println("Welcome to Midtrans..!");
 		driver.manage().window().maximize();
 		driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/div[1]/div[2]/div/div/a")).click();
 		driver.findElement(By.className("cart-checkout")).click();
