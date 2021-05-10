@@ -1,9 +1,7 @@
-#Author: souravray281@gmail.com 
-
 
 Feature: To test add Pillow in Cart flow
 
-	@FirefoxBrowser
+  @FirefoxBrowser
   Scenario: Check click funtionality on Buynow button
     Given Firefox Browser is open
     And User is on Homepage in Firefox Browser
@@ -18,3 +16,4 @@ Feature: To test add Pillow in Cart flow
     And Users enters the Password in Firefox Browser
     When Hits on OK in Firefox Browser
     Then Order is confirmed in Firefox Browser
+    
