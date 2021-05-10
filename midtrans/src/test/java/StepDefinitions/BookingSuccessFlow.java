@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,7 +15,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class Buynow {
+public class BookingSuccessFlow {
 
 	WebDriver driver = null;
 
@@ -105,22 +106,44 @@ public class Buynow {
 	}
 
 	@And("Users enters the Password")
-	public void users_enters_the_password() {
-		WebDriverWait wait = new WebDriverWait(driver,10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("PaRes")));
-		driver.findElement(By.id("PaRes")).sendKeys("112233");
-		System.out.println("TEST END123");
-	
+	public void users_enters_the_password() throws InterruptedException {
+		
+		
+		int size = driver.findElements(By.tagName("iframe")).size(); 
+	    System.out.println("Total Frames :" + size);
+	    Thread.sleep(8000);
+	    WebElement iframe = driver.findElements(By.tagName("iframe")).get(0);
+	    driver.switchTo().frame(iframe);
+		
+	    String t1 = "Issuing Bank";
+	      if ( driver.getPageSource().contains("Issuing Bank")){
+	         System.out.println("Text: " + t1 + " is present. ");
+	      } else {
+	         System.out.println("Text: " + t1 + " is not present. ");
+	      }
+	      
+	    WebDriverWait wait = new WebDriverWait(driver,10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("PaRes")));
+		driver.findElement(By.name("PaRes")).sendKeys("112233");
 	}
 
 	@When("Hits on OK")
 	public void hits_on_ok() {
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		driver.findElement(By.name("ok")).click();
 	}
 
 	@Then("Order is confirmed")
-	public void order_is_confirmed() {
-		System.out.println("Inside Step - Order is confirmed");
+	public void order_is_confirmed() throws InterruptedException  {
+		 Thread.sleep(8000);
+		driver.switchTo().parentFrame();
+		String t = "Thank you for your purchase.";
+	      // getPageSource() to get page source
+	      if ( driver.getPageSource().contains("Thank you for your purchase.")){
+	         System.out.println("Text: " + t + " is present. ");
+	      } else {
+	         System.out.println("Text: " + t + " is not present. ");
+	      }
+	    driver.close();
 	}
 }
