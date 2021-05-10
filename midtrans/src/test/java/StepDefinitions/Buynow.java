@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -75,7 +77,7 @@ public class Buynow {
 
 	@And("User clicks on Continue")
 	public void user_clicks_on_continue() throws InterruptedException  {
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		driver.findElement(By.className("button-main-content")).click();
 	}
 
@@ -90,25 +92,31 @@ public class Buynow {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.findElement(By.name("cardnumber")).sendKeys("4811111111111114");
 		//driver.findElement(By.name("input-group col-xs-7")).sendKeys(Keys.TAB);
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.findElement(By.className("input-group col-xs-7")).sendKeys("1224");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.findElement(By.className("input-group col-xs-5")).sendKeys("123");
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.findElement(By.xpath("(//input[@type='tel'])[2]")).sendKeys("1224");;  
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.findElement(By.xpath("//input[@value='']")).sendKeys("123");
 	}
 
 	@When("Hits on Pay Now")
 	public void hits_on_pay_now() {
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("//a[@href ='#/']")).click();
 	}
 
 	@And("Users enters the Password")
 	public void users_enters_the_password() {
-		
+		WebDriverWait wait = new WebDriverWait(driver,10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("PaRes")));
+		driver.findElement(By.id("PaRes")).sendKeys("112233");
+		System.out.println("TEST END123");
+	
 	}
 
 	@When("Hits on OK")
 	public void hits_on_ok() {
-		
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.findElement(By.name("ok")).click();
 	}
 
 	@Then("Order is confirmed")
