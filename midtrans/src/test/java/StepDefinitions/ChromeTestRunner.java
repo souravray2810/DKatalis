@@ -7,12 +7,12 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class) 
 @CucumberOptions(
 		strict = true,
-		features = {"src/test/resources/Features/Chrome_successflow.feature"},
+		features = {"src/test/resources/Features"},
 		glue = {"StepDefinitions"},
 		tags = "@ChromeBrowser",
 		plugin = {"json:target/cucumber.json"},
-		monochrome = true
-		)
+		monochrome = true)
+
 public class ChromeTestRunner {
 
 }

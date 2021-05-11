@@ -6,9 +6,11 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class) 
 @CucumberOptions(
-		features = "src/test/resources/Features",
+		strict = true,
+		features = {"src/test/resources/Features"},
 		glue = {"StepDefinitions"},
 		tags = "@FirefoxBrowser",
+		plugin = {"json:target/cucumber.json"},
 		monochrome = true
 		)
 
